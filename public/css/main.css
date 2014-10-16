@@ -1,0 +1,21 @@
+input#search{float:left;width:80%;}
+i.glyphicon{padding: 0 10px;}
+table.table{margin-top:20px;width: 96%;}
+table.table td,table.table th{text-align: center;}
+table.table td.right{text-align: right;}
+input.ng-dirty.ng-invalid{background: lightpink;}
+input.ng-dirty.ng-valid{background: lightgreen;}
+.my-label{float:left;margin: 0 10px;}
+.submit{margin-top:20px;}
+.ngFade.ng-enter{transition: 0.5s linear opacity;opacity: 0;}
+.ngFade.ng-enter-stagger,.ngFade.ng-leave-stagger{transition-delay:0.2s;}
+.ngFade.ng-enter.ng-enter-active{opacity: 1;}
+.ngFade.ng-leave{transition: 0.5s linear opacity;opacity: 1;}
+.ngFade.ng-leave.ng-leave-active{opacity: 0;}
+
+#list-group #list{padding:10px;font-size:14px;}
+#list-group span{position: relative;}
+span.label{padding:10px;}
+.cont{position: relative}
+.cont span{position: absolute;right:-10px;}
+img.img-responsive{background: lightgray;width:300px;height: 300px;}

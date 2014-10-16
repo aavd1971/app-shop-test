@@ -1,0 +1,68 @@
+<div ng-controller="BasketCtrl">
+<div class>
+    <form name="formSearch" novalidate>
+        <input id="search" name="search" type="text" class="form-control" placeholder="поиск..." ng-model="search"/>
+    </form>
+                        <span class="btn-group">
+                            <button class="btn btn-default" reset-form-search><i class="glyphicon glyphicon-refresh"></i></button>
+                        </span>
+</div>
+<form name="formRepeat" novalidate>
+    <table class="table table-hover table-separated">
+        <tr>
+            <th>название</th><th>кол-во,шт.</th><th>цена,руб.</th><th>&nbsp;</th><th>&nbsp;</th>
+        </tr>
+        <tr ng-repeat="item in items | filter: search" class="ngFade">
+            <td><input class="form-control" type="text" value="{{ item.name }}" name="name" ng-model="item.name" ng-disabled="dis" required ng-minlength="2" ng-maxlength="5"/></td>
+            <td><input class="form-control" type="text" value="{{ item.qty }}" name="qty" ng-model="item.qty" ng-disabled="dis" required ng-pattern="pattern1"/></td>
+            <td><input class="form-control" type="text" value="{{ item.price }}" name="price" ng-model="item.price" ng-disabled="dis" required ng-pattern="pattern1"/></td>
+            <td><button add-form-control class="btn btn-primary btn-xs" ng-click="editItem(item)" ng-disabled="formRepeat.$invalid"><i class="glyphicon glyphicon-edit"></i></button></td>
+            <td><button class="btn btn-warning btn-xs" ng-click="removeItem(item)"><i class="glyphicon glyphicon-remove"></i></button></td>
+        </tr>
+        <tr>
+            <td class="text-right right" colspan="2">Итого:</td>
+            <td><strong>{{ total | number:0 }}</strong> руб.</td>
+        </tr>
+    </table>
+</form>
+<div class="clearfix"></div>
+<div class="form-group">
+    <form name="formAdd" novalidate>
+        <label class="my-label">Название:
+            <input type="text" class="form-control" name="name" ng-model="form.name" placeholder="название" required ng-minlength="2" ng-maxlength="5"/>
+            <div class="error alert alert-warning" ng-show="formAdd.name.$error.required && formAdd.name.$dirty">
+                необходимо заполнить поле
+            </div>
+            <div class="error alert alert-warning" ng-show="formAdd.name.$error.minlength">
+                поле должно быть более 2 символов
+            </div>
+            <div class="error alert alert-warning" ng-show="formAdd.name.$error.maxlength">
+                поле должно быть менее 5 символов
+            </div>
+        </label>
+        <label class="my-label">кол-во,шт.:
+            <input type="text" class="form-control" name="qty" ng-model="form.qty" placeholder="кол-во" required ng-pattern="pattern1"/>
+            <div class="error alert alert-warning" ng-show="formAdd.qty.$error.required && formAdd.qty.$dirty">
+                необходимо заполнить поле
+            </div>
+            <div class="error alert alert-warning" ng-show="formAdd.qty.$error.pattern">
+                только цифры от 2 до 3 знаков
+            </div>
+        </label>
+        <label class="my-label">цена,руб.:
+            <input type="text" class="form-control" name="price" ng-model="form.price" placeholder="цена" required ng-minlength="1" ng-maxlength="3"/>
+            <div class="error alert alert-warning" ng-show="formAdd.price.$error.required && formAdd.price.$dirty">
+                необходимо заполнить поле
+            </div>
+            <div class="error alert alert-warning" ng-show="formAdd.price.$error.minlength">
+                минимум 1 знак
+            </div>
+            <div class="error alert alert-warning" ng-show="formAdd.price.$error.maxlength">
+                максимум 3 знака
+            </div>
+        </label>
+        <button type="submit" class="submit btn btn-success" ng-disabled="formAdd.$invalid" ng-click="sendForm(form)"><i class="glyphicon glyphicon-send"></i></button>
+        <button reset class="submit btn btn-danger"><i class="glyphicon glyphicon-remove"></i></button>
+    </form>
+</div>
+</div>

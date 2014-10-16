@@ -1,0 +1,55 @@
+app.factory('data',function($http,$q){
+    return {
+
+        getData: function(){
+            var def = $q.defer();
+            $http.get('/app/read.php').success(function(data){
+                def.resolve(data);
+            })
+            .error(function (error){
+                def.reject(error);
+                }
+            );
+            return def.promise;
+        },
+
+        insertData: function(dataSend){
+            var def = $q.defer();
+            $http.post('/app/create.php',dataSend,{headers:  {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function(data){
+                def.resolve(data);
+            })
+                .error(function (error){
+                    def.reject(error);
+                }
+            );
+            return def.promise;
+        },
+
+        remove: function (item){
+            var def = $q.defer();
+            var dataDelete = 'id=' + item.id;
+            $http.post('/app/delete.php',dataDelete,{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (data){
+                def.resolve(data);
+            }
+            ).error(function (error){
+                def.reject(error);
+            }
+            );
+            return def.promise;
+        },
+
+        edit: function (item){
+            var def = $q.defer();
+            var dataEdit = 'id=' + item.id + '&name=' + item.name + '&qty=' + item.qty + '&price=' + item.price;
+            $http.post('/app/update.php',dataEdit,{headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (data){
+                    def.resolve(data);
+                }
+            ).error(function (error){
+                    def.reject(error);
+                }
+            );
+            return def.promise;
+        }
+
+    }
+})
