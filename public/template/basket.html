@@ -12,7 +12,7 @@
         <tr>
             <th>название</th><th>кол-во,шт.</th><th>цена,руб.</th><th>&nbsp;</th><th>&nbsp;</th>
         </tr>
-        <tr ng-repeat="item in items | filter: search" class="ngFade">
+        <tr ng-repeat="item in items | filter: search | orderBy: 'name'" class="ngFade">
             <td><input class="form-control" type="text" value="{{ item.name }}" name="name" ng-model="item.name" ng-disabled="dis" required ng-minlength="2" ng-maxlength="5"/></td>
             <td><input class="form-control" type="text" value="{{ item.qty }}" name="qty" ng-model="item.qty" ng-disabled="dis" required ng-pattern="pattern1"/></td>
             <td><input class="form-control" type="text" value="{{ item.price }}" name="price" ng-model="item.price" ng-disabled="dis" required ng-pattern="pattern1"/></td>
